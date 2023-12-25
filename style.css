@@ -1,10 +1,9 @@
 body {
-    margin: 20px 20px 0 20px;
+/*     margin: 20px 20px 0 20px; */
     
-    background-repeat: no-repeat;
-    background-size: cover;
+/*     background-repeat: no-repeat; */
+    
     text-align: center;
-    
     color: #382338;
     font-family: Rubik Lines, sans-serif;
     font-size: 30px;
@@ -12,6 +11,7 @@ body {
 
 .content-wrapper {
     background-image: url("purple-space.gif");
+    background-size: cover;
     /* text-shadow: 3px 3px 5px black; */
     margin-top: 120px;
 }
