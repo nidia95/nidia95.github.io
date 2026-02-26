@@ -17,6 +17,8 @@
 
 html {
     scroll-behavior: smooth;
+    /* CSS Scroll Snapping for cinematic feel */
+    scroll-snap-type: y proximity; 
 }
 
 body {
@@ -24,6 +26,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-dark);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 a {
@@ -42,12 +45,20 @@ ul {
     margin: 0 auto;
 }
 
+/* =========================================
+   Cinematic Section Spacing & Layout
+   ========================================= */
 .section {
-    padding: 100px 0;
+    min-height: 100vh;
+    padding: 120px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-snap-align: start; /* Centers the section perfectly */
 }
 
 .bg-alt {
-    background-color: rgba(137, 104, 95, 0.05); /* Very light tint of secondary accent */
+    background-color: rgba(137, 104, 95, 0.05); 
 }
 
 .section-title {
@@ -70,14 +81,30 @@ ul {
 }
 
 /* =========================================
+   Reveal Animations (The "Cinematic" Magic)
+   ========================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
    Navigation
    ========================================= */
 header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: var(--bg-color);
-    box-shadow: 0 2px 10px rgba(79, 73, 76, 0.1);
+    background-color: rgba(244, 236, 220, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(79, 73, 76, 0.05);
     z-index: 1000;
     transition: all 0.3s ease;
 }
@@ -86,28 +113,41 @@ header {
     display: flex;
     align-items: center;
     height: 70px;
+    justify-content: space-between;
 }
 
 .logo {
-    width: 160px;
-    height: 100px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--accent-primary);
-    letter-spacing: 1px;
+    width: 120px;
+    height: auto;
 }
 
 .nav-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.1rem;
 }
 
 .nav-links a {
     font-weight: 500;
     color: var(--text-dark);
+    position: relative;
 }
 
-.nav-links a:hover,
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
 .nav-links a.active {
     color: var(--accent-primary);
 }
@@ -117,13 +157,15 @@ header {
     cursor: pointer;
     flex-direction: column;
     gap: 5px;
+    z-index: 1001;
 }
 
 .hamburger span {
     width: 25px;
     height: 3px;
     background-color: var(--text-dark);
-    transition: 0.3s;
+    transition: 0.3s cubic-bezier(0.5, 0, 0, 1);
+    transform-origin: left;
 }
 
 /* =========================================
@@ -138,16 +180,17 @@ header {
 }
 
 .hero-content h1 {
-    font-size: 4rem;
+    font-size: 4.5rem;
     color: var(--text-dark);
     margin-bottom: 10px;
+    line-height: 1.1;
 }
 
 .hero-content h2 {
     font-size: 2rem;
     color: var(--accent-secondary);
     font-weight: 400;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .hero-content p {
@@ -180,7 +223,8 @@ header {
 
 .btn-primary:hover {
     background-color: var(--text-dark);
-    color: var(--bg-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .btn-secondary {
@@ -192,13 +236,14 @@ header {
 .btn-secondary:hover {
     background-color: var(--accent-secondary);
     color: var(--bg-color);
+    transform: translateY(-2px);
 }
 
 /* =========================================
    About Section
    ========================================= */
 .about-text {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
@@ -225,15 +270,20 @@ header {
     position: absolute;
     left: -38px;
     top: 0;
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background-color: var(--bg-color);
     border: 3px solid var(--accent-primary);
+    transition: background-color 0.3s ease;
+}
+
+.timeline-item:hover::before {
+    background-color: var(--accent-primary);
 }
 
 .timeline-date {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--accent-primary);
     margin-bottom: 5px;
@@ -252,13 +302,21 @@ header {
 }
 
 .timeline-content ul {
-    list-style-type: disc;
-    margin-left: 20px;
+    list-style-type: none;
     color: var(--text-dark);
 }
 
 .timeline-content li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline-content li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
 }
 
 /* =========================================
@@ -272,15 +330,18 @@ header {
 
 .card {
     background-color: #fff;
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(79, 73, 76, 0.05);
+    box-shadow: 0 4px 20px rgba(79, 73, 76, 0.05);
     border-top: 4px solid var(--accent-secondary);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(79, 73, 76, 0.1);
 }
 
 .card h3 {
@@ -293,11 +354,13 @@ header {
     color: var(--text-dark);
     font-size: 0.95rem;
     margin-bottom: 20px;
+    flex-grow: 1;
 }
 
 .card-link {
     color: var(--accent-primary);
     font-weight: 600;
+    margin-top: auto;
 }
 
 .card-link:hover {
@@ -331,6 +394,8 @@ header {
 
 .edu-item {
     margin-bottom: 2rem;
+    padding-left: 15px;
+    border-left: 2px solid rgba(189, 134, 106, 0.3);
 }
 
 .edu-item h3 {
@@ -352,10 +417,16 @@ header {
 .skill-tag {
     background-color: var(--accent-secondary);
     color: var(--bg-color);
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 10px 18px;
+    border-radius: 30px;
     font-size: 0.9rem;
     font-weight: 500;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.skill-tag:hover {
+    transform: translateY(-3px);
+    background-color: var(--accent-primary);
 }
 
 /* =========================================
@@ -366,31 +437,52 @@ header {
 }
 
 .contact-info {
-    margin-top: 2rem;
+    margin-top: 3rem;
     font-size: 1.1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .contact-info a {
     color: var(--accent-primary);
+    font-weight: 500;
+}
+
+.contact-info a:hover {
+    color: var(--text-dark);
 }
 
 footer {
     background-color: var(--text-dark);
     color: var(--bg-color);
     text-align: center;
-    padding: 20px 0;
+    padding: 25px 0;
     font-size: 0.9rem;
 }
 
 /* =========================================
-   Media Queries (Mobile First approach support)
+   Media Queries (Mobile Adjustments)
    ========================================= */
 @media screen and (max-width: 768px) {
+    .section {
+        padding: 80px 0;
+        scroll-snap-align: none; /* Disable snapping on mobile to prevent cutoffs */
+    }
+
     .hamburger {
         display: flex;
+    }
+
+    /* Animated Hamburger toggles */
+    .hamburger.toggle span:nth-child(1) {
+        transform: rotate(45deg);
+    }
+    .hamburger.toggle span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.toggle span:nth-child(3) {
+        transform: rotate(-45deg);
     }
 
     .nav-links {
@@ -398,11 +490,12 @@ footer {
         right: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: var(--bg-color);
+        background-color: rgba(244, 236, 220, 0.98);
         width: 100%;
+        height: calc(100vh - 70px);
         text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        justify-content: center;
+        transition: 0.4s cubic-bezier(0.5, 0, 0, 1);
         padding: 20px 0;
     }
 
@@ -411,7 +504,7 @@ footer {
     }
 
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .hero-content h2 {
@@ -428,6 +521,6 @@ footer {
     }
     
     .split-section {
-        gap: 2rem;
+        gap: 3rem;
     }
 }
