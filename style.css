@@ -45,6 +45,12 @@ ul {
     margin: 0 auto;
 }
 
+.icon-inline {
+  width: 20px;
+  margin-bottom: 4px;
+  vertical-align: middle;
+}
+
 /* =========================================
    Cinematic Section Spacing & Layout
    ========================================= */
@@ -117,8 +123,8 @@ header {
 }
 
 .logo {
-    width: 120px;
-    height: auto;
+  width: 185px;
+  height: auto;
 }
 
 .nav-links {

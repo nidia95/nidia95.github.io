@@ -40,12 +40,6 @@
           fillND 0.8s ease-in-out 2.2s forwards;
       }
 
-      /* Terminal typing cursor */
-      .cursor {
-        opacity: 0;
-        animation: blink 1.2s step-end infinite 1.5s;
-      }
-
       /* A subtle underline representing an active code editor line */
       .underline {
         opacity: 0;
@@ -63,7 +57,6 @@
       @keyframes revealND { to { opacity: 1; } }
       @keyframes drawND { to { stroke-dashoffset: 0; } }
       @keyframes fillND { to { fill: #bd866a; stroke-width: 0; } }
-      @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
       @keyframes drawUnderline { to { stroke-dashoffset: 0; opacity: 0.25; } }
     </style>
   </defs>
@@ -72,11 +65,11 @@
   <g transform="translate(62, 25)" class="font-code" text-anchor="middle" dominant-baseline="middle">
     
     <!-- Subtle Animated Editor Line Underneath -->
-    <line x1="-31" y1="18" x2="68" y2="18" class="underline" />
+    <line x1="-28" y1="16" x2="34" y2="16" class="underline" />
 
     <!-- Left Bracket: < -->
     <g class="bracket-left">
-      <text x="-31" y="0" font-size="24" font-weight="500" class="accent-secondary">&lt;</text>
+      <text x="-24" y="0" font-size="24" font-weight="500" class="accent-secondary">&lt;</text>
     </g>
     
     <!-- Central Initials: ND -->
@@ -84,12 +77,8 @@
     
     <!-- Right Bracket: /> -->
     <g class="bracket-right">
-      <text x="40" y="0" font-size="24" font-weight="500" class="accent-secondary">/&gt;</text>
-    </g>
-    
-    <!-- Blinking Cursor: _ -->
-    <g class="cursor">
-      <text x="68" y="0" font-size="28" font-weight="800" class="text-dark">_</text>
+      <text x="21" y="0" font-size="24" font-weight="500" class="accent-secondary">/</text>
+      <text x="30" y="0" font-size="24" font-weight="500" class="accent-secondary">&gt;</text>
     </g>
     
   </g>
