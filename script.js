@@ -23,8 +23,8 @@ const revealElements = document.querySelectorAll('.reveal');
 
 const revealOptions = {
     root: null,
-    rootMargin: '0px 0px -100px 0px', // Triggers slightly before element comes into full view
-    threshold: 0.1
+    rootMargin: '0px 0px -200px 0px', // Triggers slightly before element comes into full view
+    threshold: 0.05
 };
 
 const revealObserver = new IntersectionObserver((entries, observer) => {
