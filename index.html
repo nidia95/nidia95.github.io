@@ -4,39 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nadia Davari | Developer</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta name="description"
+        content="Nadia Davari — Software Engineer and Project Manager specialising in Python, Flask, and IoT systems. Based in Tehran, Iran.">
+
+    <title>Nadia Davari | Software Engineer</title>
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" href="favicon.png" type="image/png">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header id="navbar">
+    <!-- Skip to main content for keyboard/screen-reader users -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header id="navbar" role="banner">
         <div class="container nav-container">
-            <img class="logo" src="images/logo.svg" alt="ND Logo">
-            <nav>
-                <ul class="nav-links">
+            <a href="#home" aria-label="Nadia Davari — back to top">
+                <img class="logo" src="images/logo.svg" alt="ND Logo">
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-links" role="list">
                     <li><a href="#about" class="nav-item">About</a></li>
                     <li><a href="#experience" class="nav-item">Experience</a></li>
                     <li><a href="#projects" class="nav-item">Projects</a></li>
-                    <li><a href="#education" class="nav-item">Education & Skills</a></li>
+                    <li><a href="#education" class="nav-item">Education &amp; Skills</a></li>
                     <li><a href="#contact" class="nav-item">Contact</a></li>
                 </ul>
             </nav>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="nav-links">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
         </div>
     </header>
 
-    <main class="scroll-container">
-        <section id="home" class="hero section">
+    <main id="main-content" class="scroll-container">
+
+        <section id="home" class="hero section" aria-labelledby="hero-heading">
             <div class="container hero-content reveal">
-                <h1>Hello, I'm Nadia Davari.</h1>
-                <h2>Professional Python Developer</h2>
+                <h1 id="hero-heading">Hello, I'm Nadia Davari.</h1>
+                <h2>Professional Software Engineer</h2>
                 <p>I build innovative software solutions and robust application systems.</p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -45,9 +57,9 @@
             </div>
         </section>
 
-        <section id="about" class="section">
+        <section id="about" class="section" aria-labelledby="about-heading">
             <div class="container reveal">
-                <h2 class="section-title">About Me</h2>
+                <h2 id="about-heading" class="section-title">About Me</h2>
                 <p class="about-text">
                     I am a Software Engineer and Project Manager with a proven track record of architecting
                     robust software systems and leading dynamic technical teams. With experience in backend development
@@ -63,32 +75,37 @@
             </div>
         </section>
 
-        <section id="experience" class="section bg-alt">
+        <section id="experience" class="section bg-alt" aria-labelledby="experience-heading">
             <div class="container">
-                <h2 class="section-title reveal">Professional Experience</h2>
-                <div class="timeline">
+                <h2 id="experience-heading" class="section-title reveal">Professional Experience</h2>
+                <ol class="timeline" aria-label="Work history">
 
-                    <div class="timeline-item reveal">
-                        <div class="timeline-date">March 2024 - Apr 2026</div>
+                    <li class="timeline-item reveal">
+                        <div class="timeline-date">
+                            <time datetime="2024-03">March 2024</time> –
+                            <time datetime="2026-04">Apr 2026</time>
+                        </div>
                         <div class="timeline-content">
-                            <h3>Project Manager & Senior Python Developer</h3>
+                            <h3>Project Manager &amp; Senior Python Developer</h3>
                             <h4>Netixsystem | Tehran, Iran</h4>
-                            <ul>
+                            <ul aria-label="Responsibilities">
                                 <li>Implemented a centralized camera monitoring system using Python and Flask, providing
                                     a seamless, high-performance web-based interface.</li>
                                 <li>Joined the company as a Senior Python/Flask Developer and quickly advanced to
-                                    Project Manager, now leading a cross-functional development team.
-                                </li>
+                                    Project Manager, now leading a cross-functional development team.</li>
                             </ul>
                         </div>
-                    </div>
+                    </li>
 
-                    <div class="timeline-item reveal" style="transition-delay: 150ms;">
-                        <div class="timeline-date">June 2022 - March 2024</div>
+                    <li class="timeline-item reveal" style="transition-delay: 150ms;">
+                        <div class="timeline-date">
+                            <time datetime="2022-06">June 2022</time> –
+                            <time datetime="2024-03">March 2024</time>
+                        </div>
                         <div class="timeline-content">
                             <h3>Technical Engineer Expert</h3>
                             <h4>Peyvand Fanavaye Giti | Tehran, Iran</h4>
-                            <ul>
+                            <ul aria-label="Responsibilities">
                                 <li>Engineered a centralized monitoring application for fire alarm systems,
                                     deploying Python and Kivy in Raspberry Pi environments.</li>
                                 <li>Architected and deployed scalable RESTful APIs, establishing a highly reliable
@@ -97,106 +114,115 @@
                                     and analyze sensor data.</li>
                             </ul>
                         </div>
-                    </div>
+                    </li>
 
-                </div>
+                </ol>
             </div>
         </section>
 
-        <section id="projects" class="section">
+        <section id="projects" class="section" aria-labelledby="projects-heading">
             <div class="container">
-                <h2 class="section-title reveal">Featured Projects</h2>
-                <div class="grid-container">
+                <h2 id="projects-heading" class="section-title reveal">Featured Projects</h2>
+                <ul class="grid-container" role="list" aria-label="Project cards">
 
-                    <div class="card reveal" style="transition-delay: 0ms;">
+                    <li class="card reveal" style="transition-delay: 0ms;">
                         <h3>Sensor Data Monitoring</h3>
                         <p>Developed a web application using Flask to monitor, visualize, and analyze sensor data.
                             Delivered for Peyvand Fanavaye Giti in 2025.</p>
-                    </div>
+                    </li>
 
-                    <div class="card reveal" style="transition-delay: 100ms;">
+                    <li class="card reveal" style="transition-delay: 100ms;">
                         <h3>Central Fire Monitoring System</h3>
                         <p>Designed and implemented a central fire monitoring system using Python and Kivy, Developed
                             for Peyvand Fanavaye Giti in 2024.</p>
-                    </div>
+                    </li>
 
-                    <div class="card reveal" style="transition-delay: 200ms;">
+                    <li class="card reveal" style="transition-delay: 200ms;">
                         <h3>Headless Raspberry Pi Connectivity</h3>
                         <p>Engineered a solution to connect a Raspberry Pi to the internet without a monitor or
                             keyboard, using advanced scripting.</p>
-                    </div>
+                    </li>
 
-                    <div class="card reveal" style="transition-delay: 300ms;">
+                    <li class="card reveal" style="transition-delay: 300ms;">
                         <h3>CCTV Monitoring System</h3>
                         <p>Developed a centralized CCTV monitoring system with Python and Flask, featuring a responsive
                             web interface and HLS-based live streaming for high-performance, real-time video
-                            surveillance. Delivered for Netixsystem .</p>
-                    </div>
+                            surveillance. Delivered for Netixsystem.</p>
+                    </li>
 
-                </div>
+                </ul>
             </div>
         </section>
 
-        <section id="education" class="section bg-alt">
+        <section id="education" class="section bg-alt" aria-labelledby="education-heading">
             <div class="container split-section">
 
                 <div class="education-block reveal">
-                    <h2 class="section-title">Education</h2>
+                    <h2 id="education-heading" class="section-title">Education</h2>
                     <div class="edu-item">
                         <h3>Master of Computer Engineering (Software)</h3>
                         <p><strong>Shahid Beheshti University</strong> | Tehran, Iran</p>
-                        <p>2022 - 2024</p>
+                        <p><time datetime="2022">2022</time> – <time datetime="2024">2024</time></p>
                     </div>
                     <div class="edu-item">
                         <h3>Bachelor of Computer Engineering (IT)</h3>
                         <p><strong>Sharif University of Technology</strong> | Tehran, Iran</p>
-                        <p>2015 - 2019</p>
+                        <p><time datetime="2015">2015</time> – <time datetime="2019">2019</time></p>
                     </div>
                 </div>
 
                 <div class="skills-block reveal" style="transition-delay: 150ms;">
                     <h2 class="section-title">Technical Skills</h2>
-                    <div class="skills-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Kivy (GUI)</span>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">HTML & CSS & JS</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">.NET (C#)</span>
-                        <span class="skill-tag">REST API</span>
-                        <span class="skill-tag">SQL Database</span>
-                        <span class="skill-tag">Raspberry Pi </span>
-                    </div>
+                    <ul class="skills-tags" role="list" aria-label="Technical skills">
+                        <li class="skill-tag">Python</li>
+                        <li class="skill-tag">Kivy (GUI)</li>
+                        <li class="skill-tag">Flask</li>
+                        <li class="skill-tag">Docker</li>
+                        <li class="skill-tag">HTML &amp; CSS &amp; JS</li>
+                        <li class="skill-tag">Git</li>
+                        <li class="skill-tag">.NET (C#)</li>
+                        <li class="skill-tag">REST API</li>
+                        <li class="skill-tag">SQL Database</li>
+                        <li class="skill-tag">Raspberry Pi</li>
+                    </ul>
                 </div>
 
             </div>
         </section>
 
-        <section id="contact" class="section">
+        <section id="contact" class="section" aria-labelledby="contact-heading">
             <div class="container contact-container reveal">
-                <h2 class="section-title">Get In Touch</h2>
+                <h2 id="contact-heading" class="section-title">Get In Touch</h2>
                 <p>I am currently available for new opportunities. Let's connect!</p>
-                <div class="contact-info">
-                    <p>&#128205; <strong>Location:</strong> Tehran, Iran</p>
-                    <p>&#9742; <strong>Phone:</strong> (+98) 912 728 9805</p>
+                <address class="contact-info">
                     <p>
-                        <img class="icon-inline" src="images/email-blk.svg" alt="email icon">
+                        <span aria-hidden="true">📍</span>
+                        <strong>Location:</strong> Tehran, Iran
+                    </p>
+                    <p>
+                        <span aria-hidden="true">&#9742;</span>
+                        <strong>Phone:</strong>
+                        <a href="tel:+989127289805">(+98) 912 728 9805</a>
+                    </p>
+                    <p>
+                        <img class="icon-inline" src="images/icons/email-blk.svg" alt="">
                         <strong>Email:</strong>
                         <a href="mailto:n.p.davari@gmail.com">n.p.davari@gmail.com</a>
                     </p>
                     <p>
-                        <img class="icon-inline" src="images/linkedin.svg" alt="Linkedin icon">
-                        <strong>Linkedin:</strong>
-                        <a href="https://www.linkedin.com/in/npdavari" target="_blank">www.linkedin.com/in/npdavari</a>
+                        <img class="icon-inline" src="images/icons/linkedin.svg" alt="">
+                        <strong>LinkedIn:</strong>
+                        <a href="https://www.linkedin.com/in/npdavari" target="_blank" rel="noopener noreferrer">
+                            www.linkedin.com/in/npdavari
+                        </a>
                     </p>
-                </div>
+                </address>
             </div>
         </section>
 
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
             <p>&copy; 2026 Nadia Davari. All rights reserved.</p>
         </div>

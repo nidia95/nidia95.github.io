@@ -1,6 +1,6 @@
-/* =========================================
+/* ---------------------------
    CSS Variables & Resets
-   ========================================= */
+   --------------------------- */
 :root {
   --bg-color: #f4ecdc;
   --accent-primary: #bd866a;
@@ -8,9 +8,20 @@
   --text-dark: #4f494c;
   --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+
+  /* Spacing scale */
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --space-xl: 4rem;
+
+  /* Transition */
+  --transition-base: 0.3s ease;
 }
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -18,8 +29,6 @@
 
 html {
   scroll-behavior: smooth;
-  /* CSS Scroll Snapping for cinematic feel */
-  scroll-snap-type: y proximity;
 }
 
 body {
@@ -28,24 +37,21 @@ body {
   color: var(--text-dark);
   line-height: 1.6;
   overflow-x: hidden;
-  user-select: none; /* Prevent text selection */
-  -webkit-user-select: none; /* Chrome/Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE/Edge */
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  transition: color 0.3s ease;
+  transition: color var(--transition-base);
 }
 
-ul {
+ul,
+ol {
   list-style: none;
 }
 
-div {
-  cursor: default; /* Normal cursor on divs */
+img {
+  max-width: 100%;
 }
 
 .container {
@@ -55,21 +61,108 @@ div {
 }
 
 .icon-inline {
+  display: inline-block;
   width: 20px;
-  margin-bottom: 4px;
-  vertical-align: middle;
+  vertical-align: sub;
 }
 
-/* =========================================
-   Cinematic Section Spacing & Layout
-   ========================================= */
+/* ---------------------------
+   Skip Link (Accessibility)
+   --------------------------- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--accent-primary);
+  color: var(--bg-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 4px 4px;
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ---------------------------
+   Focus styles (keyboard navigation)
+   --------------------------- */
+:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------------------------
+   Reduced motion preference
+   --------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .scroll-container {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  
+    /* Hide scrollbar visually, keep functionality */
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE / Edge */
+  }
+
+  /* Chrome, Safari, Opera */
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------
+   Scroll Snap Container
+   --------------------------- */
+.scroll-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+
+  /* Hide scrollbar visually, keep functionality */
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE / Edge */
+}
+
+/* Chrome, Safari, Opera */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------------------------
+   Section Layout
+   --------------------------- */
 .section {
-  min-height: 100vh;
-  padding: 120px 0;
+  height: 100vh;          /* exact viewport height — required for mandatory snap */
+  min-height: 600px;      /* safety floor on very small screens */
+  padding: 120px 0 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  scroll-snap-align: start; /* Centers the section perfectly */
+  scroll-snap-align: start;
+  scroll-snap-stop: always; /* don't skip sections on fast scroll */
+  overflow-y: auto;         /* let section scroll internally if content overflows */
 }
 
 .bg-alt {
@@ -79,7 +172,7 @@ div {
 .section-title {
   font-size: 2.5rem;
   color: var(--text-dark);
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-lg);
   text-align: center;
   position: relative;
 }
@@ -95,9 +188,9 @@ div {
   transform: translateX(-50%);
 }
 
-/* =========================================
-   Reveal Animations (The "Cinematic" Magic)
-   ========================================= */
+/* ---------------------------
+   Reveal Animations
+   --------------------------- */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -110,18 +203,19 @@ div {
   transform: translateY(0);
 }
 
-/* =========================================
+/* ---------------------------
    Navigation
-   ========================================= */
+   --------------------------- */
 header {
   position: fixed;
   top: 0;
   width: 100%;
   background-color: rgba(244, 236, 220, 0.95);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 2px 10px rgba(79, 73, 76, 0.05);
   z-index: 1000;
-  transition: all 0.3s ease;
+  transition: box-shadow var(--transition-base);
 }
 
 .nav-container {
@@ -145,6 +239,7 @@ header {
   font-weight: 500;
   color: var(--text-dark);
   position: relative;
+  padding-bottom: 4px;
 }
 
 .nav-links a::after {
@@ -152,10 +247,10 @@ header {
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: -4px;
+  bottom: 0;
   left: 0;
   background-color: var(--accent-primary);
-  transition: width 0.3s ease;
+  transition: width var(--transition-base);
 }
 
 .nav-links a:hover::after,
@@ -167,31 +262,37 @@ header {
   color: var(--accent-primary);
 }
 
+/* Hamburger button */
 .hamburger {
   display: none;
   cursor: pointer;
   flex-direction: column;
   gap: 5px;
   z-index: 1001;
+  background: none;
+  border: none;
+  padding: 4px;
 }
 
 .hamburger span {
+  display: block;
   width: 25px;
   height: 3px;
   background-color: var(--text-dark);
-  transition: 0.3s cubic-bezier(0.5, 0, 0, 1);
+  transition: transform 0.3s cubic-bezier(0.5, 0, 0, 1),
+              opacity 0.3s ease;
   transform-origin: left;
 }
 
-/* =========================================
+/* ---------------------------
    Hero Section
-   ========================================= */
+   --------------------------- */
 .hero {
   height: 100vh;
   display: flex;
   align-items: center;
   text-align: center;
-  padding-top: 70px; /* Offset for header */
+  padding-top: 70px;
 }
 
 .hero-content h1 {
@@ -211,24 +312,29 @@ header {
 .hero-content p {
   font-size: 1.2rem;
   max-width: 600px;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 40px;
   color: var(--text-dark);
 }
 
 .hero-buttons {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: var(--space-md);
 }
 
 .btn {
+  display: inline-block;
   padding: 12px 30px;
   border-radius: 4px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color var(--transition-base),
+              color var(--transition-base),
+              transform var(--transition-base),
+              box-shadow var(--transition-base);
   border: 2px solid transparent;
+  text-align: center;
 }
 
 .btn-primary {
@@ -254,9 +360,9 @@ header {
   transform: translateY(-2px);
 }
 
-/* =========================================
+/* ---------------------------
    About Section
-   ========================================= */
+   --------------------------- */
 .about-text {
   font-size: 1.2rem;
   max-width: 800px;
@@ -265,9 +371,9 @@ header {
   color: var(--text-dark);
 }
 
-/* =========================================
+/* ---------------------------
    Experience Section
-   ========================================= */
+   --------------------------- */
 .timeline {
   max-width: 800px;
   margin: 0 auto;
@@ -276,7 +382,7 @@ header {
 }
 
 .timeline-item {
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-sm);
   position: relative;
 }
 
@@ -290,7 +396,7 @@ header {
   border-radius: 50%;
   background-color: var(--bg-color);
   border: 3px solid var(--accent-primary);
-  transition: background-color 0.3s ease;
+  transition: background-color var(--transition-base);
 }
 
 .timeline-item:hover::before {
@@ -317,7 +423,6 @@ header {
 }
 
 .timeline-content ul {
-  list-style-type: none;
   color: var(--text-dark);
 }
 
@@ -334,9 +439,9 @@ header {
   color: var(--accent-primary);
 }
 
-/* =========================================
+/* ---------------------------
    Projects Section
-   ========================================= */
+   --------------------------- */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -349,7 +454,9 @@ header {
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(79, 73, 76, 0.05);
   border-top: 4px solid var(--accent-secondary);
-  transition: opacity 0.6s ease-out, transform 0.9s ease, box-shadow 0.3s ease;
+  transition: opacity 0.6s ease-out,
+              transform 0.9s ease,
+              box-shadow var(--transition-base);
   display: flex;
   flex-direction: column;
 }
@@ -372,23 +479,13 @@ header {
   flex-grow: 1;
 }
 
-.card-link {
-  color: var(--accent-primary);
-  font-weight: 600;
-  margin-top: auto;
-}
-
-.card-link:hover {
-  color: var(--text-dark);
-}
-
-/* =========================================
+/* ---------------------------
    Education & Skills Section
-   ========================================= */
+   --------------------------- */
 .split-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 4rem;
+  gap: var(--space-xl);
 }
 
 .education-block,
@@ -427,7 +524,7 @@ header {
 .skills-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--space-sm);
 }
 
 .skill-tag {
@@ -437,7 +534,7 @@ header {
   border-radius: 30px;
   font-size: 0.9rem;
   font-weight: 500;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform var(--transition-base), background-color var(--transition-base);
 }
 
 .skill-tag:hover {
@@ -445,19 +542,20 @@ header {
   background-color: var(--accent-primary);
 }
 
-/* =========================================
-   Contact & Footer
-   ========================================= */
+/* ---------------------------
+   Contact Section
+   --------------------------- */
 .contact-container {
   text-align: center;
 }
 
 .contact-info {
-  margin-top: 3rem;
+  margin-top: var(--space-lg);
   font-size: 1.1rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-md);
+  font-style: normal; /* override <address> default italic */
 }
 
 .contact-info a {
@@ -469,6 +567,9 @@ header {
   color: var(--text-dark);
 }
 
+/* ---------------------------
+   Footer
+   --------------------------- */
 footer {
   background-color: var(--text-dark);
   color: var(--bg-color);
@@ -477,27 +578,49 @@ footer {
   font-size: 0.9rem;
 }
 
-/* =========================================
-   Media Queries (Mobile Adjustments)
-   ========================================= */
+/* ---------------------------
+   Media Queries (Mobile)
+   --------------------------- */
 @media screen and (max-width: 768px) {
+  /* Disable snap on mobile — sections may be taller than viewport */
+  .scroll-container {
+    height: 100vh;           /* keep the container */
+    overflow-y: scroll;      /* keep scrolling */
+    scroll-snap-type: y proximity;  /* snap gently, never trap */
+  
+    /* Hide scrollbar visually, keep functionality */
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE / Edge */
+  }
+
+  /* Chrome, Safari, Opera */
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
   .section {
-    padding: 80px 0;
-    scroll-snap-align: none; /* Disable snapping on mobile to prevent cutoffs */
+    height: auto;
+    min-height: 100svh;
+    scroll-snap-stop: normal; /* don't force-stop on every section */
+    padding: 100px 0 60px;
+    scroll-snap-align: none; 
+    overflow-y: visible;
   }
 
   .hamburger {
     display: flex;
   }
 
-  /* Animated Hamburger toggles */
-  .hamburger.toggle span:nth-child(1) {
+  /* Animated hamburger states */
+  .hamburger[aria-expanded="true"] span:nth-child(1) {
     transform: rotate(45deg);
   }
-  .hamburger.toggle span:nth-child(2) {
+
+  .hamburger[aria-expanded="true"] span:nth-child(2) {
     opacity: 0;
   }
-  .hamburger.toggle span:nth-child(3) {
+
+  .hamburger[aria-expanded="true"] span:nth-child(3) {
     transform: rotate(-45deg);
   }
 
@@ -511,7 +634,7 @@ footer {
     height: calc(100vh - 70px);
     text-align: center;
     justify-content: center;
-    transition: 0.4s cubic-bezier(0.5, 0, 0, 1);
+    transition: right 0.4s cubic-bezier(0.5, 0, 0, 1);
     padding: 20px 0;
   }
 
@@ -537,6 +660,6 @@ footer {
   }
 
   .split-section {
-    gap: 3rem;
+    gap: var(--space-lg);
   }
 }
