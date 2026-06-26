@@ -106,10 +106,9 @@ img {
   .scroll-container {
     scroll-snap-type: none;
     scroll-behavior: auto;
-  
     /* Hide scrollbar visually, keep functionality */
-    scrollbar-width: none;        /* Firefox */
-    -ms-overflow-style: none;     /* IE / Edge */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE / Edge */
   }
 
   /* Chrome, Safari, Opera */
@@ -141,8 +140,8 @@ img {
   scroll-behavior: smooth;
 
   /* Hide scrollbar visually, keep functionality */
-  scrollbar-width: none;        /* Firefox */
-  -ms-overflow-style: none;     /* IE / Edge */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
 }
 
 /* Chrome, Safari, Opera */
@@ -154,15 +153,15 @@ img {
    Section Layout
    --------------------------- */
 .section {
-  height: 100vh;          /* exact viewport height — required for mandatory snap */
-  min-height: 600px;      /* safety floor on very small screens */
+  height: 100vh; /* exact viewport height — required for mandatory snap */
+  min-height: 600px; /* safety floor on very small screens */
   padding: 120px 0 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   scroll-snap-align: start;
   scroll-snap-stop: always; /* don't skip sections on fast scroll */
-  overflow-y: auto;         /* let section scroll internally if content overflows */
+  overflow-y: auto; /* let section scroll internally if content overflows */
 }
 
 .bg-alt {
@@ -279,8 +278,7 @@ header {
   width: 25px;
   height: 3px;
   background-color: var(--text-dark);
-  transition: transform 0.3s cubic-bezier(0.5, 0, 0, 1),
-              opacity 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.5, 0, 0, 1), opacity 0.3s ease;
   transform-origin: left;
 }
 
@@ -288,7 +286,7 @@ header {
    Hero Section
    --------------------------- */
 .hero {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   text-align: center;
@@ -330,9 +328,8 @@ header {
   font-weight: 600;
   cursor: pointer;
   transition: background-color var(--transition-base),
-              color var(--transition-base),
-              transform var(--transition-base),
-              box-shadow var(--transition-base);
+    color var(--transition-base), transform var(--transition-base),
+    box-shadow var(--transition-base);
   border: 2px solid transparent;
   text-align: center;
 }
@@ -411,12 +408,12 @@ header {
 }
 
 .timeline-content h3 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: var(--text-dark);
 }
 
 .timeline-content h4 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--accent-secondary);
   margin-bottom: 15px;
   font-weight: 500;
@@ -450,13 +447,12 @@ header {
 
 .card {
   background-color: #fff;
-  padding: 2.5rem 2rem;
+  padding: 1.3rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(79, 73, 76, 0.05);
   border-top: 4px solid var(--accent-secondary);
-  transition: opacity 0.6s ease-out,
-              transform 0.9s ease,
-              box-shadow var(--transition-base);
+  transition: opacity 0.6s ease-out, transform 0.3s ease,
+    box-shadow var(--transition-base);
   display: flex;
   flex-direction: column;
 }
@@ -474,7 +470,7 @@ header {
 
 .card p {
   color: var(--text-dark);
-  font-size: 0.87rem;
+  font-size: 0.8rem;
   margin-bottom: 20px;
   flex-grow: 1;
 }
@@ -534,7 +530,8 @@ header {
   border-radius: 30px;
   font-size: 0.9rem;
   font-weight: 500;
-  transition: transform var(--transition-base), background-color var(--transition-base);
+  transition: transform var(--transition-base),
+    background-color var(--transition-base);
 }
 
 .skill-tag:hover {
@@ -584,13 +581,13 @@ footer {
 @media screen and (max-width: 768px) {
   /* Disable snap on mobile — sections may be taller than viewport */
   .scroll-container {
-    height: 100vh;           /* keep the container */
-    overflow-y: scroll;      /* keep scrolling */
-    scroll-snap-type: y proximity;  /* snap gently, never trap */
-  
+    height: 100vh; /* keep the container */
+    overflow-y: scroll; /* keep scrolling */
+    scroll-snap-type: y proximity; /* snap gently, never trap */
+
     /* Hide scrollbar visually, keep functionality */
-    scrollbar-width: none;        /* Firefox */
-    -ms-overflow-style: none;     /* IE / Edge */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE / Edge */
   }
 
   /* Chrome, Safari, Opera */
@@ -603,7 +600,7 @@ footer {
     min-height: 100svh;
     scroll-snap-stop: normal; /* don't force-stop on every section */
     padding: 100px 0 60px;
-    scroll-snap-align: none; 
+    scroll-snap-align: none;
     overflow-y: visible;
   }
 
