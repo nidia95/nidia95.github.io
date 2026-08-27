@@ -23,6 +23,6 @@ I build backend systems and full-stack web applications, with hands-on experienc
 
 ## Contact
 
-- 📧 [n.p.davari@gmail.com](mailto:n.p.davari@gmail.com)
+- 📧 [nadiadavari95@gmail.com](mailto:nadiadavari95@gmail.com)
 - 💼 [LinkedIn](https://www.linkedin.com/in/nadia-davari)
 - 🌐 [nadiadavari.ir](https://nadiadavari.ir)
