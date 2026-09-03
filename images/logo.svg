@@ -1,11 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50" width="100%" height="100%">
   <defs>
     <style>
-      /* Importing a beautiful, clean monospace font for developers */
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;800&amp;display=swap');
-      
-      .font-code { 
-        font-family: 'JetBrains Mono', monospace; 
+      /* Local monospace font — JetBrains Mono if installed locally, otherwise a close system fallback (no external request) */
+      .font-code {
+        font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code',
+          'Consolas', 'Menlo', 'Liberation Mono', 'Courier New', monospace;
       }
 
       /* Using your exact color palette */
